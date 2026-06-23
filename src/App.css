@@ -1,0 +1,148 @@
+@import "tailwindcss";
+@import "./css/fonts.css";
+
+@custom-variant dark (&: where(.dark, .dark *));
+
+@theme {
+  --background-app: oklch(1 0 0);
+
+  /* Primary */
+  --color-primary-900: oklch(0.55 0.23 264);
+  --color-primary-800: oklch(0.6 0.22 264);
+  --color-primary-700: oklch(0.65 0.2 264);
+  --color-primary-600: oklch(0.7 0.18 264);
+  --color-primary-500: oklch(0.74 0.16 264);
+  --color-primary-400: oklch(0.78 0.14 264);
+  --color-primary-300: oklch(0.82 0.12 264);
+  --color-primary-200: oklch(0.86 0.1 264);
+  --color-primary-100: oklch(0.9 0.08 264);
+  --color-primary-50: oklch(0.93 0.06 264);
+
+  /* Secondary (Gray scale) */
+  --color-secondary-900: oklch(0.21 0.03 264);
+  --color-secondary-800: oklch(0.28 0.03 264);
+  --color-secondary-700: oklch(0.37 0.03 264);
+  --color-secondary-600: oklch(0.45 0.03 264);
+  --color-secondary-500: oklch(0.55 0.02 264);
+  --color-secondary-400: oklch(0.71 0.02 264);
+  --color-secondary-300: oklch(0.87 0.01 264);
+  --color-secondary-200: oklch(0.93 0.01 264);
+  --color-secondary-100: oklch(0.97 0.005 264);
+  --color-secondary-50: oklch(0.985 0.002 264);
+  --color-secondary-0: oklch(1 0 0);
+
+  /* Status colors */
+  --color-success: oklch(0.72 0.18 150);
+  --color-warning: oklch(0.8 0.17 75);
+  --color-error: oklch(0.65 0.22 25);
+
+  /* Reds */
+  --color-red-500: oklch(0.62 0.25 27);
+  --color-red-300: oklch(0.78 0.15 27);
+
+  /* Fonts */
+  --font-sans: Vazirmatn, sans-serif;
+
+  --width-screen-sm: var(--breakpoint-sm);
+  --width-screen-md: var(--breakpoint-md);
+  --width-screen-lg: var(--breakpoint-lg);
+  --width-screen-xl: var(--breakpoint-xl);
+  --width-screen-2xl: var(--breakpoint-2xl);
+}
+
+@variant dark {
+  --background-app: oklch(0 0 0);
+  /* Secondary reversed for dark mode */
+  --color-secondary-900: oklch(0.985 0.002 264);
+  --color-secondary-800: oklch(0.97 0.005 264);
+  --color-secondary-700: oklch(0.93 0.01 264);
+  --color-secondary-600: oklch(0.87 0.01 264);
+  --color-secondary-500: oklch(0.71 0.02 264);
+  --color-secondary-400: oklch(0.55 0.02 264);
+  --color-secondary-300: oklch(0.45 0.03 264);
+  --color-secondary-200: oklch(0.37 0.03 264);
+  --color-secondary-100: oklch(0.28 0.03 264);
+  --color-secondary-50: oklch(0.21 0.03 264);
+  --color-secondary-0: oklch(0.18 0.03 264);
+
+  --backdrop-color: oklch(0 0 0);
+}
+
+.rti--container {
+  background-color: var(--color-secondary-100);
+  --rti-radius: 0.375rem;
+  --rti-s: 0.5rem;
+  --rti-tag: #edf2f7;
+  --rti-tag-remove: #e53e3e;
+  border: none;
+}
+.rti--container .rti--input {
+  background-color: var(--color-secondary-200);
+  color: var(--color-secondary-800);
+  padding: 0.3rem 1rem;
+  border-radius: 0.5rem;
+}
+
+.rti--tag {
+  background-color: var(--color-secondary-500);
+  color: var(--color-secondary-500);
+}
+
+@layer components {
+  .textField__input {
+    @apply w-full py-3 px-4 rounded-xl text-secondary-900 border border-secondary-300 hover:border-primary-500 focus:border-primary-500 transition-all duration-300 ease-out focus:shadow-lg focus:shadow-primary-200 dark:focus:shadow-secondary-200;
+  }
+  .btn {
+    @apply px-3 py-1 font-bold rounded-xl transition-all duration-300 cursor-pointer;
+  }
+  .btn--primary {
+    @apply px-4 py-3 bg-primary-900 text-white hover:bg-primary-800 shadow-lg  dark:shadow-secondary-200;
+  }
+  .btn--secondary {
+    @apply bg-secondary-600 text-secondary-100;
+  }
+  .btn--outline {
+    @apply border border-secondary-700 text-secondary-700;
+  }
+  .btn--danger {
+    @apply border border-rose-700 text-rose-700;
+  }
+  .badge {
+    @apply inline-block whitespace-nowrap rounded-xl px-2 py-0.5;
+  }
+  .badge--primary {
+    @apply bg-primary-900 text-white;
+  }
+  .badge--secondary {
+    @apply bg-secondary-200 text-secondary-600;
+  }
+  .badge--success {
+    @apply bg-green-500 text-white;
+  }
+  .badge--danger {
+    @apply bg-red-500 text-white;
+  }
+}
+
+html,
+body {
+  padding: 0;
+  margin: 0;
+  font-family: "Vazir";
+  min-height: 100vh;
+  user-select: none;
+  background-color: var(--background-app);
+}
+
+* {
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+  /* border: none; */
+  outline: none;
+  /* padding: 0; */
+  /* margin: 0; */
+}
+
+button {
+  cursor: pointer;
+}
