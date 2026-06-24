@@ -25,6 +25,7 @@ function SendOTPForm({ onSubmit, isSendingOtp, phoneNumber, onChange }) {
         onChange={onChange}
         name="phoneNumber"
         placeholder="09121234567"
+        dir="ltr"
       />
       <div>
         {isSendingOtp ? (
