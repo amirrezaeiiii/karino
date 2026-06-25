@@ -3,8 +3,10 @@ import CompleteProfileForm from "../features/authentication/CompleteProfileForm"
 
 function CompleteProfile() {
   return (
-    <div className="flex justify-center items-center min-h-screen">
-      <CompleteProfileForm />
+    <div className="container xl:max-w-7xl mx-auto">
+      <div className="flex justify-center items-center min-h-screen">
+        <CompleteProfileForm />
+      </div>
     </div>
   );
 }
