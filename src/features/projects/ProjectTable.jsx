@@ -2,35 +2,39 @@ import Empty from "../../ui/Empty";
 import Loading from "../../ui/Loading";
 import Table from "../../ui/Table";
 import ProjectRow from "./ProjectRow";
+import ProjectsHeader from "./ProjectsHeader";
 import useOwnerProcts from "./useOwnerProjects";
 
 function ProjectTable() {
   const { isLoading, projects } = useOwnerProcts();
 
   if (isLoading) return <Loading />;
-  if (!projects.length) return <Empty />;
+  if (!projects.length) return <Empty resourceName="پروژه ای" />;
 
   return (
-    <Table>
-      <Table.Header>
-        <th>#</th>
-        <th>عنوان پروژه</th>
-        <th>دسته بندی</th>
-        <th>
-          بودجه <span className="text-xs">(تومان)</span>
-        </th>
-        <th>ددلاین</th>
-        <th>تگ ها</th>
-        <th>فریلنسر</th>
-        <th>وضعیت</th>
-        <th>عملیات</th>
-      </Table.Header>
-      <Table.Body>
-        {projects.map((project, index) => (
-          <ProjectRow key={project._id} project={project} index={index} />
-        ))}
-      </Table.Body>
-    </Table>
+    <>
+      <ProjectsHeader />
+      <Table>
+        <Table.Header>
+          <th>#</th>
+          <th>عنوان پروژه</th>
+          <th>دسته بندی</th>
+          <th>
+            بودجه <span className="text-xs">(تومان)</span>
+          </th>
+          <th>ددلاین</th>
+          <th>تگ ها</th>
+          <th>فریلنسر</th>
+          <th>وضعیت</th>
+          <th>عملیات</th>
+        </Table.Header>
+        <Table.Body>
+          {projects.map((project, index) => (
+            <ProjectRow key={project._id} project={project} index={index} />
+          ))}
+        </Table.Body>
+      </Table>
+    </>
   );
 }
 
