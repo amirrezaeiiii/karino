@@ -1,8 +1,8 @@
 import { HiOutlineArrowLeft } from "react-icons/hi";
-import TextField from "../../ui/TextField";
 import Loading from "../../ui/Loading";
+import TextField from "../../ui/TextField";
 
-function SendOTPForm({ onSubmit, isSendingOtp, phoneNumber, onChange }) {
+function SendOTPForm({ onSubmit, isSendingOtp, register, errors }) {
   return (
     <form
       onSubmit={onSubmit}
@@ -21,11 +21,19 @@ function SendOTPForm({ onSubmit, isSendingOtp, phoneNumber, onChange }) {
 
       <TextField
         label="لطفا شماره موبایل خود را وارد کنید"
-        value={phoneNumber}
-        onChange={onChange}
+        register={register}
         name="phoneNumber"
         placeholder="09121234567"
         dir="ltr"
+        type="number"
+        validationSchema={{
+          required: "شماره تلفن ضروری است",
+          pattern: {
+            value: /^09\d{9}$/,
+            message: "شماره تلفن نامعتبر است",
+          },
+        }}
+        errors={errors}
       />
       <div>
         {isSendingOtp ? (

@@ -1,13 +1,15 @@
-import { useState } from "react";
-import SendOTPForm from "./SendOtpForm";
-import CheckOTPForm from "./CheckOTPForm";
 import { useMutation } from "@tanstack/react-query";
-import { getOtp } from "../../services/authService";
+import { useState } from "react";
+import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
+import { getOtp } from "../../services/authService";
+import CheckOTPForm from "./CheckOTPForm";
+import SendOTPForm from "./SendOtpForm";
 
 function AuthContainer() {
   const [step, setStep] = useState(1);
-  const [phoneNumber, setPhoneNumber] = useState("09182629584");
+  // const [phoneNumber, setPhoneNumber] = useState("");
+  const { handleSubmit, register, getValues,formState:{errors} } = useForm();
 
   const {
     isPending: isSendingOtp,
@@ -17,10 +19,9 @@ function AuthContainer() {
     mutationFn: getOtp,
   });
 
-  const sendOtpHandler = async (e) => {
-    e.preventDefault();
+  const sendOtpHandler = async () => {
     try {
-      const data = await mutateAsync({ phoneNumber });
+      const data = await mutateAsync({ phoneNumber: getValues("phoneNumber") });
       setStep(2);
       toast.success(data.message);
     } catch (error) {
@@ -34,10 +35,12 @@ function AuthContainer() {
         return (
           <SendOTPForm
             isSendingOtp={isSendingOtp}
-            onSubmit={sendOtpHandler}
+            onSubmit={handleSubmit(sendOtpHandler)}
             setStep={setStep}
-            phoneNumber={phoneNumber}
-            onChane={(e) => setPhoneNumber(e.target.value)}
+            register={register}
+            errors={errors}
+            // phoneNumber={phoneNumber}
+            // onChane={(e) => setPhoneNumber(e.target.value)}
           />
         );
 
@@ -46,7 +49,7 @@ function AuthContainer() {
           <CheckOTPForm
             otpResponse={otpResponse}
             onResendOtp={sendOtpHandler}
-            phoneNumber={phoneNumber}
+            phoneNumber={getValues("phoneNumber")}
             onBack={() => setStep((s) => s - 1)}
           />
         );
