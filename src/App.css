@@ -77,15 +77,15 @@
   border: none;
 }
 .rti--container .rti--input {
-  background-color: var(--color-secondary-200);
+  background-color: var(--color-secondary-300);
   color: var(--color-secondary-800);
   padding: 0.3rem 1rem;
   border-radius: 0.5rem;
 }
 
 .rti--tag {
-  background-color: var(--color-secondary-500);
-  color: var(--color-secondary-500);
+  background-color: var(--color-secondary-300);
+  color: var(--color-secondary-600);
 }
 
 @layer components {
