@@ -33,8 +33,8 @@ function Sidebar() {
               className={({ isActive }) =>
                 `flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm transition-colors ${
                   isActive
-                    ? "bg-primary-500/20 text-primary-900 font-medium"
-                    : "text-gray-600 hover:bg-gray-100 hover:text-gray-900"
+                    ? "bg-primary-900/80 text-secondary-0 font-medium"
+                    : "text-gray-600 hover:bg-gray-200 hover:text-gray-900"
                 }`
               }
             >

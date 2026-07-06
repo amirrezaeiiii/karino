@@ -84,8 +84,8 @@
 }
 
 .rti--tag {
-  background-color: var(--color-secondary-300);
-  color: var(--color-secondary-600);
+  background-color: var(--color-secondary-500);
+  color: var(--color-secondary-0);
 }
 
 @layer components {

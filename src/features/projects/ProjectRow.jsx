@@ -6,7 +6,9 @@ import Table from "../../ui/Table";
 import toLocalDateShort from "../../utils/toLacalDateShort";
 import toPersianNumbersWithComma from "../../utils/toPersianNumbers";
 import truncateText from "../../utils/truncateText";
+import CreateProjectForm from "./CreateProjectForm";
 import useRemoveProject from "./useRemoveProject";
+import ToggleProjectStatus from "./ToggleProjectStatus";
 
 function ProjectRow({ project, index }) {
   const [isEditOpen, setIsEditOpen] = useState(false);
@@ -31,11 +33,7 @@ function ProjectRow({ project, index }) {
       </td>
       <td>{project.freelancer?.name || "-"}</td>
       <td>
-        {project.status === "OPEN" ? (
-          <span className="badge badge--success">باز</span>
-        ) : (
-          <span className="badge badge--danger">بسته</span>
-        )}
+        <ToggleProjectStatus project={project}/>
       </td>
       <td>
         <div className="flex items-center gap-x-4">
@@ -48,7 +46,10 @@ function ProjectRow({ project, index }) {
               title={`ویرایش ${project.title}`}
               onClose={() => setIsEditOpen(false)}
             >
-              modal.....
+              <CreateProjectForm
+                projectToEdit={project}
+                onClose={() => setIsEditOpen(false)}
+              />
             </Modal>
           </>
           <>
