@@ -1,5 +1,7 @@
 import { useState } from "react";
+import { HiEye } from "react-icons/hi";
 import { HiOutlinePencilSquare, HiOutlineTrash } from "react-icons/hi2";
+import { Link } from "react-router-dom";
 import ConfirmDelete from "../../ui/ConfirmDelete";
 import Modal from "../../ui/Modal";
 import Table from "../../ui/Table";
@@ -7,13 +9,13 @@ import toLocalDateShort from "../../utils/toLacalDateShort";
 import toPersianNumbersWithComma from "../../utils/toPersianNumbers";
 import truncateText from "../../utils/truncateText";
 import CreateProjectForm from "./CreateProjectForm";
-import useRemoveProject from "./useRemoveProject";
 import ToggleProjectStatus from "./ToggleProjectStatus";
+import useRemoveProject from "./useRemoveProject";
 
 function ProjectRow({ project, index }) {
   const [isEditOpen, setIsEditOpen] = useState(false);
   const [isDeleteOpen, setIsDeleteOpen] = useState(false);
-  const { isDeleting, removeProject } = useRemoveProject();
+  const { removeProject } = useRemoveProject();
 
   return (
     <Table.Row>
@@ -33,7 +35,7 @@ function ProjectRow({ project, index }) {
       </td>
       <td>{project.freelancer?.name || "-"}</td>
       <td>
-        <ToggleProjectStatus project={project}/>
+        <ToggleProjectStatus project={project} />
       </td>
       <td>
         <div className="flex items-center gap-x-4">
@@ -74,6 +76,11 @@ function ProjectRow({ project, index }) {
             </Modal>
           </>
         </div>
+      </td>
+      <td>
+        <Link to={project._id} className="flex justify-center">
+          <HiEye className="w-5 h-5 text-primary-800" />
+        </Link>
       </td>
     </Table.Row>
   );
