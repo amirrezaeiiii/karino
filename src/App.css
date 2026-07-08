@@ -1,7 +1,9 @@
 @import "tailwindcss";
 @import "./css/fonts.css";
 
-@custom-variant dark (&: where(.dark, .dark *));
+
+@custom-variant dark (&:where(.dark, .dark *));
+
 
 @theme {
   --background-app: oklch(1 0 0);
@@ -49,6 +51,8 @@
   --width-screen-xl: var(--breakpoint-xl);
   --width-screen-2xl: var(--breakpoint-2xl);
 }
+
+
 
 @variant dark {
   --background-app: oklch(0 0 0);
