@@ -1,10 +1,10 @@
-import { useQueryClient } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
+import RHFSelect from "../../ui/RHFSelect";
+
+import { useQueryClient } from "@tanstack/react-query";
 import { useParams } from "react-router-dom";
 import Loading from "../../ui/Loading";
-import RHFSelect from "../../ui/RHFSelect";
 import useChangeProposalStaus from "./useChangeProposalStaus";
-
 
 const options = [
   {
@@ -35,7 +35,7 @@ function ChangeProposalStatus({ proposalId, onClose }) {
           onClose();
           queryClient.invalidateQueries({ queryKey: ["project", projectId] });
         },
-      },
+      }
     );
   };
 

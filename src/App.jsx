@@ -10,6 +10,8 @@ import OwnerDashboard from "./pages/OwnerDashboard";
 import Project from "./pages/Project";
 import Projects from "./pages/Projects";
 import AppLayout from "./ui/AppLayout";
+import OwnerLayout from "./features/owner/OwnerLayout";
+import DashboardLayout from "./features/owner/DashboardLayout";
 
 const queryClient = new QueryClient();
 
@@ -21,9 +23,9 @@ function App() {
         <Routes>
           <Route path="/auth" element={<Auth />} />
           <Route path="/complete-profile" element={<CompleteProfile />} />
-          <Route path="/owner" element={<AppLayout />}>
+          <Route path="/owner" element={<OwnerLayout />}>
             <Route index element={<Navigate to="dashboard" />} />
-            <Route path="dashboard" element={<OwnerDashboard />} />
+            <Route path="dashboard" element={<DashboardLayout />} />
             <Route path="projects" element={<Projects />} />
             <Route path="projects/:id" element={<Project />} />
           </Route>
