@@ -3,7 +3,7 @@ import { toPersianNumbers } from "../utils/toPersianNumbers";
 const colors = {
   primary: "bg-primary-100 text-primary-700",
   green: "bg-green-100 text-green-700",
-  red: "bg-red-100 text-red-700",
+  purple: "bg-purple-100 text-purple-700",
 };
 
 function Stat({ icon, value, title, color }) {
