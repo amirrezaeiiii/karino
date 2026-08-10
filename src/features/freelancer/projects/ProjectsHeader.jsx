@@ -5,11 +5,11 @@ import FilterDropDown from "../../../ui/FilterDropDown";
 const sortOptions = [
   {
     label: "مرتب سازی (جدید ترین)",
-    value: "latest",
+    value: "earliest",
   },
   {
     label: "مرتب سازی (قدیمی ترین)",
-    value: "earliest",
+    value: "latest",
   },
 ];
 
