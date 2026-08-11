@@ -3,8 +3,10 @@ import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { Toaster } from "react-hot-toast";
 import { Navigate, Route, Routes } from "react-router-dom";
 import { DarkModeProvier } from "./context/DarkModeContext";
+import AdminLayout from "./features/admin/AdminLayout";
 import FreelancerLayout from "./features/freelancer/FreelancerLayout";
 import OwnerLayout from "./features/owner/OwnerLayout";
+import AdminDashboard from "./pages/AdminDashboard";
 import Auth from "./pages/Auth";
 import CompleteProfile from "./pages/CompleteProfile";
 import FreelancerDashboard from "./pages/FreelancerDashboard";
@@ -53,6 +55,17 @@ function App() {
             <Route path="dashboard" element={<FreelancerDashboard />} />
             <Route path="proposals" element={<Proposals />} />
             <Route path="projects" element={<SubmittedProjects />} />
+          </Route>
+          <Route
+            path="/admin"
+            element={
+              <ProtectedRoute>
+                <AdminLayout />
+              </ProtectedRoute>
+            }
+          >
+            <Route index element={<Navigate to="dashboard" />} />
+            <Route path="dashboard" element={<AdminDashboard />} />
           </Route>
           <Route path="/" element={<Home />} />
           <Route path="*" element={<NotFound />} />
