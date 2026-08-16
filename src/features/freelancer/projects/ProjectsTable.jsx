@@ -17,7 +17,7 @@ function ProjectsTable() {
       <Table.Header>
         <th>#</th>
         <th>عنوان پروژه</th>
-        <th>بودجه</th>
+        <th>بودجه <span className="text-xs">(تومان)</span></th>
         <th>ددلاین</th>
         <th>وضعیت</th>
         <th>عملیات</th>
