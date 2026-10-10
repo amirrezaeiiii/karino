@@ -27,11 +27,11 @@ function Sidebar({ children, isOpen, onClose }) {
           onClick={onClose}
         />
         <aside
-          className={`fixed top-0 right-0 z-50 h-full w-64 max-w-[80vw] bg-secondary-0 border-l border-secondary-200 shadow-2xl transition-transform duration-300 ease-in-out ${
+          className={`fixed top-0 right-0 z-50 h-full w-64 max-w-[80vw] bg-secondary-0 border-l border-secondary-200 shadow-2xl transition-transform duration-300 ease-in-out flex flex-col ${
             isOpen ? "translate-x-0" : "translate-x-full"
           }`}
         >
-          <div className="flex items-center justify-between p-4 border-b border-secondary-200">
+          <div className="flex items-center justify-between p-4 border-b border-secondary-200 shrink-0">
             <span className="font-bold text-secondary-900">منو</span>
             <button
               onClick={onClose}
@@ -41,7 +41,7 @@ function Sidebar({ children, isOpen, onClose }) {
               <HiOutlineX className="w-5 h-5 text-secondary-700" />
             </button>
           </div>
-          <nav className="p-4">
+          <nav className="p-4 overflow-y-auto flex-1 min-h-0">
             <ul className="flex flex-col gap-y-2">{children}</ul>
           </nav>
         </aside>

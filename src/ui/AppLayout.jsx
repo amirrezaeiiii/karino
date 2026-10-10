@@ -1,7 +1,6 @@
-import { useState, cloneElement } from "react";
+import { cloneElement, useState } from "react";
 import { Outlet } from "react-router-dom";
 import Header from "./Header";
-import Sidebar from "./Sidebar";
 
 function AppLayout({ children }) {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);

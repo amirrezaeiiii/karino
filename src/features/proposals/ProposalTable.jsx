@@ -9,7 +9,7 @@ function ProposalTable() {
 
   if (isLoading) return <Loading />;
 
-  if (!proposals.length) return <Empty resourceName="پروپوزال" />;
+  if (!proposals.length) return <Empty resourceName="درخواست" />;
 
   return (
     <Table>
