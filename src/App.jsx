@@ -17,6 +17,7 @@ import Project from "./pages/Project";
 import Projects from "./pages/Projects";
 import Proposals from "./pages/Proposals";
 import SubmittedProjects from "./pages/SubmittedProjects";
+import Setting from "./ui/Setting";
 import Users from "./pages/Users";
 import ProtectedRoute from "./ui/ProtectedRoute";
 
@@ -43,6 +44,7 @@ function App() {
             <Route path="dashboard" element={<OwnerDashboard />} />
             <Route path="projects" element={<Projects />} />
             <Route path="projects/:id" element={<Project />} />
+            <Route path="setting" element={<Setting />} />
           </Route>
           <Route
             path="/freelancer"
@@ -56,6 +58,7 @@ function App() {
             <Route path="dashboard" element={<FreelancerDashboard />} />
             <Route path="proposals" element={<Proposals />} />
             <Route path="projects" element={<SubmittedProjects />} />
+            <Route path="setting" element={<Setting />} />
           </Route>
           <Route
             path="/admin"
@@ -70,6 +73,7 @@ function App() {
             <Route path="users" element={<Users />} />
             <Route path="projects" element={<SubmittedProjects />} />
             <Route path="proposals" element={<Proposals />} />
+            <Route path="setting" element={<Setting />} />
           </Route>
           <Route path="/" element={<Home />} />
           <Route path="*" element={<NotFound />} />

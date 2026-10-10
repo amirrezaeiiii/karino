@@ -6,7 +6,8 @@ function TextField({
   type = "text",
   required,
   errors,
-  dir
+  dir,
+  defaultValue,
 }) {
   return (
     <div>
@@ -20,6 +21,7 @@ function TextField({
         type={type}
         autoComplete="off"
         dir={dir}
+        defaultValue={defaultValue}
       />
       {errors && errors[name] && (
         <span className="text-error block text-sm mt-2">
