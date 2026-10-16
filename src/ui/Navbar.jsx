@@ -21,7 +21,7 @@ function Navbar() {
     <nav className="bg-secondary-0 border-b border-secondary-200 sticky top-0 z-30">
       <div className="container xl:max-w-7xl mx-auto px-4 flex items-center justify-between h-16">
         <div className="hidden md:flex items-center gap-x-6 text-sm font-medium">
-          <span className="font-bold text-secondary-900">کارینو</span>
+          <Link to="/" className="text-lg font-bold text-blue-600 hover:text-blue-700 transition-colors">کارینو</Link>
           {navLinks.map((link) => (
             <Link
               key={link.label}
@@ -66,7 +66,7 @@ function Navbar() {
           }`}
         >
           <div className="flex items-center justify-between p-4 border-b border-secondary-200 shrink-0">
-            <span className="font-bold text-xl text-secondary-900">کارینو</span>
+            <Link to="/" className="text-2xl font-bold text-blue-600 hover:text-blue-700 transition-colors">کارینو</Link>
             <button
               onClick={() => setIsOpen(false)}
               className="p-2 rounded-lg hover:bg-secondary-100 transition-colors"

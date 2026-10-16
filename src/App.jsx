@@ -12,14 +12,17 @@ import CompleteProfile from "./pages/CompleteProfile";
 import FreelancerDashboard from "./pages/FreelancerDashboard";
 import Home from "./pages/Home";
 import NotFound from "./pages/NotFound";
+import About from "./pages/About";
+import MainLayout from "./ui/MainLayout";
 import OwnerDashboard from "./pages/OwnerDashboard";
 import Project from "./pages/Project";
 import Projects from "./pages/Projects";
 import Proposals from "./pages/Proposals";
 import SubmittedProjects from "./pages/SubmittedProjects";
-import Setting from "./ui/Setting";
 import Users from "./pages/Users";
 import ProtectedRoute from "./ui/ProtectedRoute";
+import Setting from "./ui/Setting";
+import Contact from "./pages/Contact"
 
 const queryClient = new QueryClient();
 
@@ -75,7 +78,12 @@ function App() {
             <Route path="proposals" element={<Proposals />} />
             <Route path="setting" element={<Setting />} />
           </Route>
-          <Route path="/" element={<Home />} />
+          <Route path="/" element={<MainLayout />}>
+            <Route index element={<Home />} />
+            <Route path="about" element={<About />} />
+            <Route path="contact" element={<Contact/>} />
+          </Route>
+
           <Route path="*" element={<NotFound />} />
         </Routes>
       </QueryClientProvider>

@@ -1,13 +1,8 @@
-import Navbar from "../ui/Navbar";
-
 function Home() {
   return (
-    <>
-      <Navbar />
-      <div className="container xl:max-w-7xl mx-auto text-secondary-900">
-        home
-      </div>
-    </>
+    <div className="container xl:max-w-7xl mx-auto text-secondary-900 py-8">
+      home sdsasdadasdsadsads
+    </div>
   );
 }
 
