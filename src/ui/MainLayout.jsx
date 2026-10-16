@@ -5,7 +5,7 @@ function MainLayout() {
   return (
     <>
       <Navbar />
-      <main className="min-h-screen px-4">
+      <main className="min-h-screen px-4 bg-primary-900/10">
         <Outlet />
       </main>
     </>
@@ -13,3 +13,5 @@ function MainLayout() {
 }
 
 export default MainLayout;
+
+

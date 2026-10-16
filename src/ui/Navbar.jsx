@@ -5,8 +5,10 @@ import {
   HiOutlineInformationCircle,
   HiOutlinePhone,
 } from "react-icons/hi2";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import useUser from "../features/authentication/useUser";
 import DarkModeToggle from "./DarkModeToggle";
+import Logout from "../features/authentication/LogOut";
 
 const navLinks = [
   { label: "درباره ما", to: "/about", icon: HiOutlineInformationCircle },
@@ -16,16 +18,53 @@ const navLinks = [
 
 function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
+  const { user } = useUser();
+
+  const hasDashboardAccess =
+    user && ["OWNER", "FREELANCER", "ADMIN"].includes(user.role);
+
+  const navigate = useNavigate();
+
+  const getDashboardPath = () => {
+    if (!user) return "/auth";
+    if (user.role === "OWNER") return "/owner";
+    if (user.role === "FREELANCER") return "/freelancer";
+    if (user.role === "ADMIN") return "/admin";
+    return "/auth";
+  };
+
+  const handleDashboardLink = () => {
+    if (hasDashboardAccess) {
+      navigate(getDashboardPath());
+    } else {
+      navigate("/auth");
+    }
+  };
+
+  const getLinkTo = (link) => {
+    if (link.label === "ورود به داشبورد" && hasDashboardAccess) {
+      return getDashboardPath();
+    }
+    return link.to;
+  };
 
   return (
     <nav className="bg-secondary-0 border-b border-secondary-200 sticky top-0 z-30">
       <div className="container xl:max-w-7xl mx-auto px-4 flex items-center justify-between h-16">
         <div className="hidden md:flex items-center gap-x-6 text-sm font-medium">
-          <Link to="/" className="text-lg font-bold text-blue-600 hover:text-blue-700 transition-colors">کارینو</Link>
+          <Link
+            to="/"
+            className="text-lg font-bold text-blue-600 hover:text-blue-700 transition-colors"
+          >
+            کارینو
+          </Link>
           {navLinks.map((link) => (
             <Link
               key={link.label}
-              to={link.to}
+              to={getLinkTo(link)}
+              onClick={
+                link.label === "ورود به داشبورد" ? handleDashboardLink : undefined
+              }
               className="flex items-center gap-2 text-secondary-700 hover:text-primary-900 transition-colors"
             >
               <link.icon className="w-5 h-5" />
@@ -44,12 +83,19 @@ function Navbar() {
 
         <div className="flex items-center gap-x-6 text-sm font-medium">
           <DarkModeToggle />
-          <Link
-            to="/auth"
-            className="text-white transition-colors btn btn--primary"
-          >
-            ورود | ثبت نام
-          </Link>
+          {hasDashboardAccess ? (
+            <span className="flex items-center gap-x-3 text-secondary-900">
+              {user?.name}
+              <Logout />
+            </span>
+          ) : (
+            <Link
+              to="/auth"
+              className="text-white transition-colors btn btn--primary"
+            >
+              ورود | ثبت نام
+            </Link>
+          )}
         </div>
       </div>
 
@@ -66,7 +112,12 @@ function Navbar() {
           }`}
         >
           <div className="flex items-center justify-between p-4 border-b border-secondary-200 shrink-0">
-            <Link to="/" className="text-2xl font-bold text-blue-600 hover:text-blue-700 transition-colors">کارینو</Link>
+            <Link
+              to="/"
+              className="text-2xl font-bold text-blue-600 hover:text-blue-700 transition-colors"
+            >
+              کارینو
+            </Link>
             <button
               onClick={() => setIsOpen(false)}
               className="p-2 rounded-lg hover:bg-secondary-100 transition-colors"
@@ -80,8 +131,15 @@ function Navbar() {
               {navLinks.map((link) => (
                 <li key={link.label}>
                   <Link
-                    to={link.to}
-                    onClick={() => setIsOpen(false)}
+                    to={getLinkTo(link)}
+                    onClick={
+                      link.label === "ورود به داشبورد"
+                        ? () => {
+                            handleDashboardLink();
+                            setIsOpen(false);
+                          }
+                        : () => setIsOpen(false)
+                    }
                     className="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm text-secondary-700 hover:bg-primary-600/30 hover:text-secondary-800 transition-colors"
                   >
                     <link.icon className="w-5 h-5" />
