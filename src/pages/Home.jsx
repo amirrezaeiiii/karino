@@ -5,6 +5,9 @@ import {
   HiCursorClick,
   HiOutlinePlay,
   HiOutlineTranslate,
+  HiOutlineChat,
+  HiOutlineShieldCheck,
+  HiOutlineDownload,
 } from "react-icons/hi";
 
 const categories = [
@@ -97,8 +100,65 @@ function Home() {
           ))}
         </div>
       </section>
+
+      <section className="mt-28">
+        <h2 className="text-2xl md:text-3xl font-bold text-secondary-900 text-center mb-4">
+          در ۴ قدم به نتیجه برس
+        </h2>
+        <p className="text-center text-secondary-600 text-lg mb-12">
+          هم برای کارفرما، هم برای فریلنسر - شفاف، سریع و بدون دردسر
+        </p>
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+          {steps.map((step) => (
+            <div
+              key={step.title}
+              className="bg-secondary-100 border border-secondary-200 rounded-xl p-6 flex flex-col items-start justify-start gap-3"
+            >
+              <step.Icon className="w-8 h-8 text-primary-600" />
+              <div className="space-y-2">
+                <span className="block text-primary-900 font-bold text-sm">
+                  {step.number}
+                </span>
+                <span className="text-secondary-800 font-bold block text-sm md:text-base">
+                  {step.title}
+                </span>
+                  <span className="text-secondary-500 block text-sm">
+                  {step.description}
+                </span>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
     </div>
   );
 }
 
 export default Home;
+
+const steps = [
+  {
+   number: "قدم اول",
+    title: "پروژه ات را ثبت کن",
+    description:"در 3 دقیقه نیازت را بنویس، بودجه و زمان تحویل را مشخص کن",
+    Icon: HiOutlinePencil,
+  },
+  {
+   number: "قدم دوم",
+    title: "پیشنهاد بگیر و مقایسه کن",
+    description:"از ده ها فریلنسر متخصص پیشنهاد و نمونه کار دریافت کن",
+    Icon: HiOutlineChat,
+  },
+  {
+   number: "قدم سوم",
+    title: "با پرداخت امن شروع کن",
+    description:"مبلغ نزد کارینو میماند تا پروژه تایید شود",
+    Icon: HiOutlineShieldCheck,
+  },
+  {
+   number: "قدم چهارم",
+    title: "تحویل بگیر و امتیاز بده",
+    description:"فایل نهایی را بگیر و به فریلنسر امتیاز بده",
+    Icon: HiOutlineDownload,
+  },
+];
