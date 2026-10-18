@@ -8,6 +8,10 @@ import {
   HiOutlineChat,
   HiOutlineShieldCheck,
   HiOutlineDownload,
+  HiOutlineUserCircle,
+  HiOutlineClock,
+  HiOutlineDocument,
+  HiOutlineCurrencyDollar,
 } from "react-icons/hi";
 
 const categories = [
@@ -66,7 +70,7 @@ function Home() {
 
       <section className="bg-secondary-100 border border-secondary-200 rounded-xl py-4 px-6 md:px-12">
         <div className="flex flex-col md:flex-row items-center justify-between gap-8">
-          <h2 className="text-md md:text-lg font-bold text-secondary-500 text-right">
+          <h2 className="text-md md:text-lg text-secondary-500 text-right">
             اعتماد بیش از ۲،۰۰۰ کسب و کار ایرانی
           </h2>
           <div className="flex flex-wrap justify-center gap-6 md:gap-12 text-center">
@@ -130,6 +134,28 @@ function Home() {
           ))}
         </div>
       </section>
+
+      <section className="mt-28 py-16 rounded-2xl">
+        <h2 className="text-2xl md:text-3xl font-bold text-secondary-900 text-center mb-10">
+          با خیال راحت برون سپاری کن
+        </h2>
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-6">
+          {features.map((feature) => (
+            <div
+              key={feature.title}
+              className="bg-secondary-100 border border-secondary-200 rounded-xl p-6 flex flex-col items-start gap-3 h-full"
+            >
+              <feature.Icon className="w-8 h-8 text-primary-600" />
+              <span className="block font-bold text-secondary-900 text-sm md:text-base">
+                {feature.title}
+              </span>
+              <span className="block text-secondary-500 text-sm">
+                {feature.description}
+              </span>
+            </div>
+          ))}
+        </div>
+      </section>
     </div>
   );
 }
@@ -140,7 +166,7 @@ const steps = [
   {
    number: "قدم اول",
     title: "پروژه ات را ثبت کن",
-    description:"در 3 دقیقه نیازت را بنویس، بودجه و زمان تحویل را مشخص کن",
+    description:"در ۳ دقیقه نیازت را بنویس، بودجه و زمان تحویل را مشخص کن",
     Icon: HiOutlinePencil,
   },
   {
@@ -156,9 +182,42 @@ const steps = [
     Icon: HiOutlineShieldCheck,
   },
   {
-   number: "قدم چهارم",
+    number: "قدم چهارم",
     title: "تحویل بگیر و امتیاز بده",
     description:"فایل نهایی را بگیر و به فریلنسر امتیاز بده",
     Icon: HiOutlineDownload,
+  },
+];
+
+const features = [
+  {
+    title: "پرداخت امن",
+    description: "پول تا تایید نهایی نزد ماست، صفر درصد ریسک کلاهبرداری",
+    Icon: HiOutlineShieldCheck,
+  },
+  {
+    title: "پشتیبانی ۲۴/۷",
+    description: "تیم کارینو همیشه پاسخگوست، حتی جمعه ها",
+    Icon: HiOutlineChat,
+  },
+  {
+    title: "فریلنسر تایید شده",
+    description: "احراز هویت و بررسی نمونه کار قبل از ورود",
+    Icon: HiOutlineUserCircle,
+  },
+  {
+    title: "تحویل سریع",
+    description: "میانگین پیدا کردن فریلنسر فقط ۶ ساعت است",
+    Icon: HiOutlineClock,
+  },
+  {
+    title: "قرارداد رسمی",
+    description: "برای پروژه های بزرگ قرارداد و فاکتور رسمی",
+    Icon: HiOutlineDocument,
+  },
+  {
+    title: "کارمزد شفاف",
+    description: "بدون هزینه پنهان، فقط ۱۰% کارمزد موفقیت",
+    Icon: HiOutlineCurrencyDollar,
   },
 ];
