@@ -16,8 +16,17 @@ function Footer() {
       <div className="container xl:max-w-7xl mx-auto px-4 py-12">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8 md:gap-12">
           <div className="space-y-4">
-            <h3 className="text-lg font-bold text-primary-700">کارینو</h3>
-            <p className="text-secondary-400 text-sm">بزرگترین بازار فریلنسری ایران، اتصال کسب و کارها به متخصصان در کمتر از ۲۴ ساعت</p>
+            <div className="text-lg font-bold text-primary-700">
+              <img
+                src="/src/assets/logo-karino-Photoroom.png"
+                alt="logo-karino"
+                className="w-20"
+              />
+            </div>
+            <p className="text-secondary-400 text-sm">
+              بزرگترین بازار فریلنسری ایران، اتصال کسب و کارها به متخصصان در
+              کمتر از ۲۴ ساعت
+            </p>
             <div className="flex gap-4">
               <a
                 href="https://instagram.com"

@@ -1,14 +1,21 @@
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { HiOutlineLogin, HiOutlineX } from "react-icons/hi";
 import {
   HiOutlineBars3,
   HiOutlineInformationCircle,
   HiOutlinePhone,
 } from "react-icons/hi2";
+import { FaInstagram, FaLinkedin, FaTelegram } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
+import Logout from "../features/authentication/LogOut";
 import useUser from "../features/authentication/useUser";
 import DarkModeToggle from "./DarkModeToggle";
-import Logout from "../features/authentication/LogOut";
+
+const socialLinks = [
+  { name: "اینستاگرام", url: "https://instagram.com/karino", Icon: FaInstagram },
+  { name: "لینکدین", url: "https://linkedin.com/company/karino", Icon: FaLinkedin },
+  { name: "تلگرام", url: "https://t.me/karino", Icon: FaTelegram },
+];
 
 const navLinks = [
   { label: "درباره ما", to: "/about", icon: HiOutlineInformationCircle },
@@ -18,6 +25,8 @@ const navLinks = [
 
 function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
+  const [contactPopupOpen, setContactPopupOpen] = useState(false);
+  const contactRef = useRef(null);
   const { user } = useUser();
 
   const hasDashboardAccess =
@@ -41,12 +50,59 @@ function Navbar() {
     }
   };
 
+  useEffect(() => {
+    const handleClickOutside = (e) => {
+      if (contactRef.current && !contactRef.current.contains(e.target)) {
+        setContactPopupOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
   const getLinkTo = (link) => {
     if (link.label === "ورود به داشبورد" && hasDashboardAccess) {
       return getDashboardPath();
     }
     return link.to;
   };
+
+  const handleContactClick = (e) => {
+    e.preventDefault();
+    setContactPopupOpen(!contactPopupOpen);
+  };
+
+  const renderContactLink = () => (
+      <div className="relative" ref={contactRef}>
+        <Link
+          to="#"
+          onClick={handleContactClick}
+          className="flex items-center gap-2 text-secondary-700 hover:text-primary-900 transition-colors"
+        >
+          <HiOutlinePhone className="w-5 h-5" />
+          <span>تماس با ما</span>
+        </Link>
+        {contactPopupOpen && (
+          <div className="absolute right-0 mt-2 w-48 bg-white border border-secondary-200 rounded-lg shadow-lg z-50">
+          <div className="p-3">
+            <p className="text-xs text-secondary-500 mb-2 text-center">ارتباط با ما از طریق:</p>
+            {socialLinks.map((social) => (
+              <a
+                key={social.name}
+                href={social.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-2 px-2 py-1.5 rounded hover:bg-secondary-50 transition-colors text-secondary-700 text-sm"
+              >
+                <social.Icon className="w-4 h-4" />
+                <span>{social.name}</span>
+              </a>
+            ))}
+          </div>
+        </div>
+      )}
+    </div>
+  );
 
   return (
     <nav className="bg-secondary-0 border-b border-secondary-200 sticky top-0 z-30">
@@ -56,21 +112,32 @@ function Navbar() {
             to="/"
             className="text-lg font-bold text-blue-600 hover:text-blue-700 transition-colors"
           >
-            کارینو
+            <img
+              src="/src/assets/logo-karino-Photoroom.png"
+              alt="logo-karino"
+              className="w-15"
+            />
           </Link>
-          {navLinks.map((link) => (
-            <Link
-              key={link.label}
-              to={getLinkTo(link)}
-              onClick={
-                link.label === "ورود به داشبورد" ? handleDashboardLink : undefined
-              }
-              className="flex items-center gap-2 text-secondary-700 hover:text-primary-900 transition-colors"
-            >
-              <link.icon className="w-5 h-5" />
-              <span>{link.label}</span>
-            </Link>
-          ))}
+          {navLinks.map((link) => {
+            if (link.label === "تماس با ما") {
+              return renderContactLink();
+            }
+            return (
+              <Link
+                key={link.label}
+                to={getLinkTo(link)}
+                onClick={
+                  link.label === "ورود به داشبورد"
+                    ? handleDashboardLink
+                    : undefined
+                }
+                className="flex items-center gap-2 text-secondary-700 hover:text-primary-900 transition-colors"
+              >
+                <link.icon className="w-5 h-5" />
+                <span>{link.label}</span>
+              </Link>
+            );
+          })}
         </div>
 
         <button
@@ -128,25 +195,62 @@ function Navbar() {
           </div>
           <nav className="p-4 overflow-y-auto flex-1 min-h-0">
             <ul className="flex flex-col gap-y-2">
-              {navLinks.map((link) => (
-                <li key={link.label}>
-                  <Link
-                    to={getLinkTo(link)}
-                    onClick={
-                      link.label === "ورود به داشبورد"
-                        ? () => {
-                            handleDashboardLink();
-                            setIsOpen(false);
-                          }
-                        : () => setIsOpen(false)
-                    }
-                    className="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm text-secondary-700 hover:bg-primary-600/30 hover:text-secondary-800 transition-colors"
-                  >
-                    <link.icon className="w-5 h-5" />
-                    <span>{link.label}</span>
-                  </Link>
-                </li>
-              ))}
+              {navLinks.map((link) => {
+                if (link.label === "تماس با ما") {
+                  return (
+                    <li key={link.label} className="relative" ref={contactRef}>
+                      <Link
+                        to="#"
+                        onClick={(e) => {
+                          e.preventDefault();
+                          handleContactClick();
+                          setIsOpen(false);
+                        }}
+                        className="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm text-secondary-700 hover:bg-primary-600/30 hover:text-secondary-800 transition-colors"
+                      >
+                        <HiOutlinePhone className="w-5 h-5" />
+                        <span>تماس با ما</span>
+                      </Link>
+                      {contactPopupOpen && (
+                        <div className="mt-2 w-48 bg-secondary-0 border border-secondary-200 rounded-lg shadow-lg p-3">
+                          <p className="text-xs text-secondary-500 mb-2 text-center">ارتباط با ما از طریق:</p>
+                          {socialLinks.map((social) => (
+                            <a
+                              key={social.name}
+                              href={social.url}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="flex items-center gap-2 px-2 py-1.5 rounded hover:bg-secondary-50 transition-colors text-secondary-700 text-sm"
+                            >
+                              <social.Icon className="w-4 h-4" />
+                              <span>{social.name}</span>
+                            </a>
+                          ))}
+                        </div>
+                      )}
+                    </li>
+                  );
+                }
+                return (
+                  <li key={link.label}>
+                    <Link
+                      to={getLinkTo(link)}
+                      onClick={
+                        link.label === "ورود به داشبورد"
+                          ? () => {
+                              handleDashboardLink();
+                              setIsOpen(false);
+                            }
+                          : () => setIsOpen(false)
+                      }
+                      className="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm text-secondary-700 hover:bg-primary-600/30 hover:text-secondary-800 transition-colors"
+                    >
+                      <link.icon className="w-5 h-5" />
+                      <span>{link.label}</span>
+                    </Link>
+                  </li>
+                );
+              })}
             </ul>
           </nav>
         </aside>
