@@ -1,18 +1,20 @@
+import { useState } from "react";
 import {
-  HiOutlineChartPie,
-  HiOutlineCode,
-  HiOutlinePencil,
   HiCursorClick,
-  HiOutlinePlay,
-  HiOutlineTranslate,
+  HiOutlineChartPie,
   HiOutlineChat,
-  HiOutlineShieldCheck,
-  HiOutlineDownload,
-  HiOutlineUserCircle,
   HiOutlineClock,
-  HiOutlineDocument,
+  HiOutlineCode,
   HiOutlineCurrencyDollar,
+  HiOutlineDocument,
+  HiOutlineDownload,
+  HiOutlinePencil,
+  HiOutlinePlay,
+  HiOutlineShieldCheck,
+  HiOutlineTranslate,
+  HiOutlineUserCircle,
 } from "react-icons/hi";
+import Modal from "../ui/Modal";
 
 const categories = [
   { title: "برنامه نویسی", Icon: HiOutlineCode },
@@ -33,6 +35,8 @@ const trustedCompanies = [
 ];
 
 function Home() {
+  const [firstVisitModal, setFirstVisitModal] = useState(true);
+
   const stats = [
     { number: "+۱۰ هزار", label: "فریلنسر فعال" },
     { number: "+۵ هزار", label: "پروژه موفق" },
@@ -126,7 +130,7 @@ function Home() {
                 <span className="text-secondary-800 font-bold block text-sm md:text-base">
                   {step.title}
                 </span>
-                  <span className="text-secondary-500 block text-sm">
+                <span className="text-secondary-500 block text-sm">
                   {step.description}
                 </span>
               </div>
@@ -156,6 +160,22 @@ function Home() {
           ))}
         </div>
       </section>
+
+      <Modal
+        title="🚧 سایت در حال تکمیل است"
+        open={firstVisitModal}
+        onClose={() => setFirstVisitModal(false)}
+      >
+        <div className="text-right">
+          <p className="mb-4 text-secondary-900">
+            از اینکه از سایت ما بازدید می‌کنید سپاسگزاریم. این وب‌سایت هنوز در
+            مرحله توسعه قرار دارد و به‌طور مستمر در حال بهبود است. نظر، پیشنهاد
+            یا بازخورد شما می‌تواند به ما کمک کند تجربه‌ای بهتر بسازیم. خوشحال
+            می‌شویم پیشنهادات خود را با ما در میان بگذارید.
+          </p>
+       
+        </div>
+      </Modal>
     </div>
   );
 }
@@ -164,27 +184,27 @@ export default Home;
 
 const steps = [
   {
-   number: "قدم اول",
+    number: "قدم اول",
     title: "پروژه ات را ثبت کن",
-    description:"در ۳ دقیقه نیازت را بنویس، بودجه و زمان تحویل را مشخص کن",
+    description: "در ۳ دقیقه نیازت را بنویس، بودجه و زمان تحویل را مشخص کن",
     Icon: HiOutlinePencil,
   },
   {
-   number: "قدم دوم",
+    number: "قدم دوم",
     title: "پیشنهاد بگیر و مقایسه کن",
-    description:"از ده ها فریلنسر متخصص پیشنهاد و نمونه کار دریافت کن",
+    description: "از ده ها فریلنسر متخصص پیشنهاد و نمونه کار دریافت کن",
     Icon: HiOutlineChat,
   },
   {
-   number: "قدم سوم",
+    number: "قدم سوم",
     title: "با پرداخت امن شروع کن",
-    description:"مبلغ نزد کارینو میماند تا پروژه تایید شود",
+    description: "مبلغ نزد کارینو میماند تا پروژه تایید شود",
     Icon: HiOutlineShieldCheck,
   },
   {
     number: "قدم چهارم",
     title: "تحویل بگیر و امتیاز بده",
-    description:"فایل نهایی را بگیر و به فریلنسر امتیاز بده",
+    description: "فایل نهایی را بگیر و به فریلنسر امتیاز بده",
     Icon: HiOutlineDownload,
   },
 ];
