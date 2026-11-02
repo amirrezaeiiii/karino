@@ -91,7 +91,7 @@ function CheckOTPForm({ phoneNumber, onBack, onResendOtp, otpResponse }) {
         numInputs={6}
         renderSeparator={<span>-</span>}
         renderInput={(props) => <input type="number" {...props} />}
-        containerStyle="flex flex-row-reverse gap-x-1 justify-center w-full sm:gap-x-2"
+        containerStyle="flex text-secondary-900 flex-row-reverse gap-x-1 justify-center w-full sm:gap-x-2"
         inputStyle={{
           width: "2rem",
           padding: "0.5rem 0.2rem",

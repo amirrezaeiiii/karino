@@ -26,7 +26,8 @@ const navLinks = [
 function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [contactPopupOpen, setContactPopupOpen] = useState(false);
-  const contactRef = useRef(null);
+  const contactRefDesktop = useRef(null);
+  const contactRefMobile = useRef(null);
   const { user } = useUser();
 
   const hasDashboardAccess =
@@ -52,7 +53,13 @@ function Navbar() {
 
   useEffect(() => {
     const handleClickOutside = (e) => {
-      if (contactRef.current && !contactRef.current.contains(e.target)) {
+      const isOutsideDesktop =
+        !contactRefDesktop.current ||
+        !contactRefDesktop.current.contains(e.target);
+      const isOutsideMobile =
+        !contactRefMobile.current ||
+        !contactRefMobile.current.contains(e.target);
+      if (isOutsideDesktop && isOutsideMobile) {
         setContactPopupOpen(false);
       }
     };
@@ -73,7 +80,7 @@ function Navbar() {
   };
 
   const renderContactLink = () => (
-      <div className="relative" ref={contactRef}>
+      <div className="relative" ref={contactRefDesktop}>
         <Link
           to="#"
           onClick={handleContactClick}
@@ -84,7 +91,7 @@ function Navbar() {
         </Link>
         {contactPopupOpen && (
           <div className="absolute right-0 mt-2 w-48 bg-white border border-secondary-200 rounded-lg shadow-lg z-50">
-          <div className="p-3">
+          <div className="p-3 bg-secondary-100">
             <p className="text-xs text-secondary-500 mb-2 text-center">ارتباط با ما از طریق:</p>
             {socialLinks.map((social) => (
               <a
@@ -198,13 +205,12 @@ function Navbar() {
               {navLinks.map((link) => {
                 if (link.label === "تماس با ما") {
                   return (
-                    <li key={link.label} className="relative" ref={contactRef}>
+                    <li key={link.label} className="relative" ref={contactRefMobile}>
                       <Link
                         to="#"
                         onClick={(e) => {
                           e.preventDefault();
                           handleContactClick();
-                          setIsOpen(false);
                         }}
                         className="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm text-secondary-700 hover:bg-primary-600/30 hover:text-secondary-800 transition-colors"
                       >
@@ -212,7 +218,7 @@ function Navbar() {
                         <span>تماس با ما</span>
                       </Link>
                       {contactPopupOpen && (
-                        <div className="mt-2 w-48 bg-secondary-0 border border-secondary-200 rounded-lg shadow-lg p-3">
+                        <div className="absolute mt-2 right-0 w-48 bg-white border border-secondary-200 rounded-lg shadow-lg p-3 z-50">
                           <p className="text-xs text-secondary-500 mb-2 text-center">ارتباط با ما از طریق:</p>
                           {socialLinks.map((social) => (
                             <a

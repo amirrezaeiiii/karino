@@ -1,4 +1,30 @@
+import { useNavigate } from "react-router-dom";
+import useUser from "../features/authentication/useUser";
+
 function About() {
+  const navigate = useNavigate();
+  const { user } = useUser();
+
+  const hasDashboardAccess =
+    user && ["OWNER", "FREELANCER", "ADMIN"].includes(user.role);
+
+  const getDashboardPath = () => {
+    if (!user) return "/auth";
+    if (user.role === "OWNER") return "/owner";
+    if (user.role === "FREELANCER") return "/freelancer";
+    if (user.role === "ADMIN") return "/admin";
+    return "/auth";
+  };
+
+  const handleRoleLink = () => {
+    if (!user) {
+      navigate("/auth");
+    } else if (!hasDashboardAccess) {
+      navigate("/");
+    } else {
+      navigate(getDashboardPath());
+    }
+  };
   return (
     <div className="container xl:max-w-7xl mx-auto py-8 text-secondary-900 px-4">
       <div className="max-w-3xl mx-auto text-right space-y-10">
@@ -177,7 +203,20 @@ function About() {
             فرقی نمی‌کنه دنبال کار باشی یا دنبال متخصص برای کارت — همین حالا
             پروفایلت رو بساز و اولین قدم رو بردار. ما اینجاییم که کنارت باشیم.
           </p>
-          
+          <div className="mt-6 flex flex-col sm:flex-row gap-3 justify-center">
+            <button
+              onClick={handleRoleLink}
+              className="px-6 py-2 bg-primary-600 text-white rounded-lg hover:bg-primary-700 transition-colors text-center sm:text-left"
+            >
+              ورود به عنوان فریلنسر
+            </button>
+            <button
+              onClick={handleRoleLink}
+              className="px-6 py-2 bg-primary-600 text-white rounded-lg hover:bg-primary-700 transition-colors text-center sm:text-left"
+            >
+              ورود به عنوان کارفرما
+            </button>
+          </div>
         </div>
       </div>
     </div>
